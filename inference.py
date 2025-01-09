@@ -1,22 +1,15 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jan  8 00:03:26 2025
-
-@author: user
-"""
-
 from ultralytics import YOLO
 from PIL import Image
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    model = YOLO('runs/detect/train15/weights/best.pt')
+    model = YOLO('runs/detect/train/weights/best.pt')
     
     # Perform inference
     results = model.predict(source='沉沉291203/291203_006001.tif', save=True)
     
     # Get the image with detections
-    image_path = '沉沉291203/291203_006001.tif'
+    image_path = 'test/images/291203_006201.tif'
     image = Image.open(image_path).convert('RGB')  # Convert the image to RGB
     
     # Plot the image with predictions
