@@ -1,22 +1,21 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan  7 23:18:19 2025
-
-@author: user
-"""
-
 from ultralytics import YOLO
 
 if __name__ == '__main__':
-    
-    # Load the YOLOv8 model (pretrained on COCO, or start from scratch)
-    model = YOLO('yolov8m.pt')  # Use 'yolov8n' for a small model; adjust to 'yolov8m' or 'yolov8l' as needed.
+    # Load the YOLOv8 model (pretrained or from scratch)
+    model = YOLO('yolov8l.pt')  # Use 'yolov8n.pt', 'yolov8m.pt', or 'yolov8l.pt' based on requirements
     
     # Train the model
-    model.train(data='data.yaml', epochs=3, imgsz=1000, batch=16)
+    model.train(
+        data='data.yaml',      # Path to the dataset configuration file
+        epochs=10,             # Number of training epochs
+        imgsz=1024,            # Image size for training
+        batch=16,              # Batch size
+        freeze=10              # Number of layers to freeze for transfer learning
+    )
     
-    metrics = model.val()  # Validates the model on the validation set
-    print(metrics)
+    # Validate the model after training
+    metrics = model.val()      # Evaluates the model on the validation set
+
     
     
     
